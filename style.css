@@ -35,6 +35,8 @@
         span {
             flex-grow: 1;
             border: 0;
+            background-color: red;
+            padding: .5rem;
         }
     }
 }
