@@ -3,6 +3,17 @@
     margin: 0 auto;
 }
 
+.icon {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
+button {
+    height: 32px;
+    padding: 0 1rem;
+}
+
 .content h1 {
     text-align: center;
 }
@@ -26,6 +37,10 @@
 
     li {
         display: flex;
+        gap: .5rem;
+        label {
+            flex-grow: 1;
+        }
 
         input[type="checkbox"]:checked ~ span {
             text-decoration: line-through;

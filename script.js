@@ -1,15 +1,25 @@
-console.log("Hello, world!");
+var taskList = [];
 
 document.getElementById("formNewTask").addEventListener("submit", (event) => {
-
     event.preventDefault(); // Prevent the form from submitting
+
+    taskList.push(task);
 
     var task = document.getElementById("inputNewTask").value;
 
-    console.log("Form submitted", task);
+    localStorage.setItem("tasks", JSON.stringify(taskList)); // Save the data to local storage
 
     newTask(task);
 });
+
+function getData() { // Function to get the data from local storage
+    var data = localStorage.getItem("tasks");
+    if (data) {
+        console.log("Data retrieved", data);
+    } else {
+        console.log("No data found");
+    }
+}
 
 
 function newTask(task) {
@@ -27,8 +37,8 @@ function newTask(task) {
     newTaskText.type = "text";
 
     newTaskText.innerText = task; // Set the value of the new task text element
-    newTaskEdit.innerText = "✏️"; // Set the value of the new task edit button to a pencil emoji
-    newTaskDelete.innerText = "🗑️"; // Set the value of the new task delete button to a garbage emoji
+    newTaskEdit.innerHTML = '<img class="icon" src="/imgs/icons8-edit-100.png"></img>'; // Set the value of the new task edit button to a pencil emoji
+    newTaskDelete.innerHTML = '<img class="icon" src="/imgs/icons8-edit-100.png"></img>'; // Set the value of the new task delete button to a garbage emoji
 
     // Append the new task elements to the DOM
     newTaskLabel.appendChild(newTaskCheckbox);
@@ -58,6 +68,16 @@ function newTask(task) {
 
     newTaskText.addEventListener("focusout", () => {
         newTaskCheckbox.disabled = false;
+        newTaskEdit.disabled = false;
         newTaskText.contentEditable = false;
     });
+
+    newTaskText.addEventListener("keypress", (event) => {
+        if (event.key === "Enter") {
+            newTaskCheckbox.disabled = false;
+            newTaskEdit.disabled = false;
+            newTaskText.contentEditable = false;
+        }
+    });
+
 }
