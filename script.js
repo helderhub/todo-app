@@ -6,6 +6,7 @@ document.getElementById("formNewTask").addEventListener("submit", (event) => {
     var value = document.getElementById("inputNewTask").value;
 
     var newTaskItem = {
+        id: taskList[taskList.length - 1].id + 1, // Generate a new ID for the task item by adding 1 to the last task ID
         completed: false,
         text: value
     }; // Add the new task to the task list
@@ -72,19 +73,37 @@ function newTask(task) {
     // Add event listeners to the new task elements
     newTaskDelete.addEventListener("click", () => {
         newTask.remove();
+
+        //     var index = taskList.findIndex((i) => {
+        //         if(i.text === task.text)
+        //             return true
+        // });
+        // OR
+        var index = taskList.findIndex((i) => i.text === task.text);
+
+        console.log("Index", index);
+
+        var deletedTask = taskList.splice(index, 1); // Remove the task from the task list
+
+        localStorage.setItem("taskList", JSON.stringify(taskList)); // Save the data to local storage
     });
 
-    newTaskText.addEventListener("focusout", () => {
+
+    var editTask = (event) => {
         newTaskCheckbox.disabled = false;
         newTaskEdit.disabled = false;
         newTaskText.contentEditable = false;
-    });
 
+        task.text = newTaskText.innerText;
+        localStorage.setItem("taskList", JSON.stringify(taskList)); // Save the data to local storage
+    };
+
+    newTaskText.addEventListener("focusout", () => {
+        editTask();
+    });
     newTaskText.addEventListener("keypress", (event) => {
         if (event.key === "Enter") {
-            newTaskCheckbox.disabled = false;
-            newTaskEdit.disabled = false;
-            newTaskText.contentEditable = false;
+            editTask();
         }
     });
 
@@ -103,3 +122,18 @@ function newTask(task) {
     // Insert the new task at the beginning of the list
     List.insertBefore(newTask, List.firstChild);
 }
+
+document.getElementById("btnDeleteTasks").addEventListener("click", () => {
+
+    taskList.forEach(item, index => {
+        if (item.completed === true) {
+            taskList.splice(index, 1); // Remove the task from the task list
+            localStorage.setItem("taskList", JSON.stringify(taskList)); // Save the data to local storage
+
+            //location.reload();
+            //Location.replace("index.html"); // Refresh the page to update the list of tasks
+            //Location.href = "index.html"; // Redirect the page to update the list of tasks
+        }
+        
+    });
+});
