@@ -6,7 +6,7 @@ document.getElementById("formNewTask").addEventListener("submit", (event) => {
     var value = document.getElementById("inputNewTask").value;
 
     var newTaskItem = {
-        id: taskList[taskList.length - 1].id + 1, // Generate a new ID for the task item by adding 1 to the last task ID
+        id: taskList.length > 0 ? taskList[taskList.length - 1].id + 1 : 1, // Set the ID of the new task item to the length of the task list
         completed: false,
         text: value
     }; // Add the new task to the task list
@@ -43,6 +43,8 @@ function newTask(task) {
     var newTaskText = document.createElement("span"); // Create a new span element to hold the task text
     var newTaskEdit = document.createElement("button"); // Create a new button element to edit the task
     var newTaskDelete = document.createElement("button"); // Create a new button element to delete the task
+
+    newTask.id = 'task: ' + task.id; // Set the ID of the new task element
 
     // Set the type of the input elements 
     newTaskCheckbox.type = "checkbox";
@@ -125,14 +127,16 @@ function newTask(task) {
 
 document.getElementById("btnDeleteTasks").addEventListener("click", () => {
 
-    taskList.forEach(item, index => {
+    taskList.forEach((item, index) => {
         if (item.completed === true) {
             taskList.splice(index, 1); // Remove the task from the task list
             localStorage.setItem("taskList", JSON.stringify(taskList)); // Save the data to local storage
 
             //location.reload();
-            //Location.replace("index.html"); // Refresh the page to update the list of tasks
+            //Location.href = "https://www.google.com/"; // Refresh the page to update the list of tasks
             //Location.href = "index.html"; // Redirect the page to update the list of tasks
+
+            document.getElementById('task: ' + item.id).remove(); // Remove the task from the DOM
         }
         
     });
