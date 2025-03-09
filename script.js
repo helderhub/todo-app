@@ -1,143 +1,126 @@
+// Initialize an empty task list
 var taskList = [];
 
+// Add event listener to the form for adding new tasks
 document.getElementById("formNewTask").addEventListener("submit", (event) => {
     event.preventDefault(); // Prevent the form from submitting
 
-    var value = document.getElementById("inputNewTask").value;
+    var taskText = document.getElementById("inputNewTask").value;
 
+    // Create a new task item
     var newTaskItem = {
-        id: taskList.length > 0 ? taskList[taskList.length - 1].id + 1 : 1, // Set the ID of the new task item to the length of the task list
+        id: taskList.length > 0 ? taskList[taskList.length - 1].id + 1 : 1, // Set the ID of the new task item
         completed: false,
-        text: value
-    }; // Add the new task to the task list
+        text: taskText
+    };
 
-    taskList.push(newTaskItem); // Add the new task to the task list
+    // Add the new task to the task list
+    taskList.push(newTaskItem);
 
-    localStorage.setItem("taskList", JSON.stringify(taskList)); // Save the data to local storage
+    // Save the updated task list to local storage
+    localStorage.setItem("taskList", JSON.stringify(taskList));
 
-    newTask(newTaskItem); // Create a new task
+    // Create a new task element in the DOM
+    createTaskElement(newTaskItem);
 });
 
-function getData() { // Function to get the data from local storage
+// Function to get the data from local storage
+function getData() {
     var data = JSON.parse(localStorage.getItem("taskList"));
 
     if (data && data.length > 0) {
         console.log("Data retrieved", data);
         taskList = data;
-        data.forEach(element => { // Loop through the data and create a new task for each element
-            newTask(element);
+        data.forEach(task => {
+            createTaskElement(task);
         });
     } else {
         console.log("No data found", data);
     }
 }
 
+// Load data from local storage when the page loads
 getData();
 
-function newTask(task) {
+// Function to create a new task element in the DOM
+function createTaskElement(task) {
+    // Create new elements for the task
+    var taskItem = document.createElement("li");
+    var taskLabel = document.createElement("label");
+    var taskCheckbox = document.createElement("input");
+    var taskText = document.createElement("span");
+    var taskEditButton = document.createElement("button");
+    var taskDeleteButton = document.createElement("button");
 
-    // Create new elements on DOM
-    var newTask = document.createElement("li");
-    var newTaskLabel = document.createElement("label");
-    var newTaskCheckbox = document.createElement("input");
-    var newTaskText = document.createElement("span"); // Create a new span element to hold the task text
-    var newTaskEdit = document.createElement("button"); // Create a new button element to edit the task
-    var newTaskDelete = document.createElement("button"); // Create a new button element to delete the task
+    // Set attributes and values for the new elements
+    taskItem.id = 'task:' + task.id;
+    taskCheckbox.type = "checkbox";
+    taskCheckbox.checked = task.completed;
+    taskText.innerText = task.text;
+    taskEditButton.innerHTML = '<img class="icon" src="/imgs/icons8-edit-100.png">';
+    taskEditButton.disabled = task.completed;
+    taskDeleteButton.innerHTML = '<img class="icon" src="/imgs/icons8-delete-100.png">';
 
-    newTask.id = 'task: ' + task.id; // Set the ID of the new task element
-
-    // Set the type of the input elements 
-    newTaskCheckbox.type = "checkbox";
-    newTaskCheckbox.checked = task.completed; // Set the value of the new task checkbox element
-
-    newTaskText.type = "text";
-    newTaskText.innerText = task.text; // Set the value of the new task text element
-
-    newTaskEdit.innerHTML = '<img class="icon" src="/imgs/icons8-edit-100.png"></img>'; // Set the value of the new task edit button to a pencil emoji
-    newTaskEdit.disabled = task.completed; // Disable the edit button if the task is completed
-
-    newTaskDelete.innerHTML = '<img class="icon" src="/imgs/icons8-delete-100.png"></img>'; // Set the value of the new task delete button to a garbage emoji
-
-    newTaskCheckbox.addEventListener("change", () => {
-        task.completed = !task.completed; // Toggle the completed status of the task
-        localStorage.setItem("taskList", JSON.stringify(taskList)); // Save the data to local storage
-        newTaskEdit.disabled = task.completed; // Disable the edit button if the task is completed
-        console.log("Task completed", newTaskCheckbox.checked);
+    // Add event listeners to the new elements
+    taskCheckbox.addEventListener("change", () => {
+        task.completed = !task.completed;
+        localStorage.setItem("taskList", JSON.stringify(taskList));
+        taskEditButton.disabled = task.completed;
+        console.log("Task completed", taskCheckbox.checked);
     });
 
-    newTaskEdit.addEventListener("click", () => {
-        newTaskCheckbox.disabled = true;
-        newTaskEdit.disabled = true;
-        newTaskText.contentEditable = true;
-        newTaskText.focus();
+    taskEditButton.addEventListener("click", () => {
+        taskCheckbox.disabled = true;
+        taskEditButton.disabled = true;
+        taskText.contentEditable = true;
+        taskText.focus();
     });
 
-    // Add event listeners to the new task elements
-    newTaskDelete.addEventListener("click", () => {
-        newTask.remove();
-
-        //     var index = taskList.findIndex((i) => {
-        //         if(i.text === task.text)
-        //             return true
-        // });
-        // OR
+    taskDeleteButton.addEventListener("click", () => {
+        taskItem.remove();
         var index = taskList.findIndex((i) => i.text === task.text);
-
-        console.log("Index", index);
-
-        var deletedTask = taskList.splice(index, 1); // Remove the task from the task list
-
-        localStorage.setItem("taskList", JSON.stringify(taskList)); // Save the data to local storage
+        taskList.splice(index, 1);
+        localStorage.setItem("taskList", JSON.stringify(taskList));
     });
 
-
-    var editTask = (event) => {
-        newTaskCheckbox.disabled = false;
-        newTaskEdit.disabled = false;
-        newTaskText.contentEditable = false;
-
-        task.text = newTaskText.innerText;
-        localStorage.setItem("taskList", JSON.stringify(taskList)); // Save the data to local storage
-    };
-
-    newTaskText.addEventListener("focusout", () => {
-        editTask();
+    taskText.addEventListener("focusout", () => {
+        saveTaskEdit(task, taskText, taskCheckbox, taskEditButton);
     });
-    newTaskText.addEventListener("keypress", (event) => {
+
+    taskText.addEventListener("keypress", (event) => {
         if (event.key === "Enter") {
-            editTask();
+            saveTaskEdit(task, taskText, taskCheckbox, taskEditButton);
         }
     });
 
-    // Append the new task elements to the DOM
-    newTaskLabel.appendChild(newTaskCheckbox);
-    newTaskLabel.appendChild(newTaskText);
-    newTask.appendChild(newTaskLabel);
-    newTask.appendChild(newTaskEdit);
-    newTask.appendChild(newTaskDelete);
+    // Append the new elements to the task item
+    taskLabel.appendChild(taskCheckbox);
+    taskLabel.appendChild(taskText);
+    taskItem.appendChild(taskLabel);
+    taskItem.appendChild(taskEditButton);
+    taskItem.appendChild(taskDeleteButton);
 
-    // Append the new task to the list
-    var List = document.getElementById("List");
-    //taskList.appendChild(newTask); 
-    // Append the new task to the list
-
-    // Insert the new task at the beginning of the list
-    List.insertBefore(newTask, List.firstChild);
+    // Insert the new task item at the beginning of the list
+    var taskListElement = document.getElementById("List");
+    taskListElement.insertBefore(taskItem, taskListElement.firstChild);
 }
 
+// Function to save the edited task
+function saveTaskEdit(task, taskText, taskCheckbox, taskEditButton) {
+    taskCheckbox.disabled = false;
+    taskEditButton.disabled = false;
+    taskText.contentEditable = false;
+    task.text = taskText.innerText;
+    localStorage.setItem("taskList", JSON.stringify(taskList));
+}
+
+// Add event listener to the button for deleting completed tasks
 document.getElementById("btnDeleteTasks").addEventListener("click", () => {
-
-    taskList.forEach((item, index) => {
-        if (item.completed === true) {
-            taskList.splice(index, 1); // Remove the task from the task list
-            localStorage.setItem("taskList", JSON.stringify(taskList)); // Save the data to local storage
-
-            //location.reload();
-            //Location.href = "https://www.google.com/"; // Refresh the page to update the list of tasks
-            //Location.href = "index.html"; // Redirect the page to update the list of tasks
-
-            document.getElementById('task: ' + item.id).remove(); // Remove the task from the DOM
+    taskList = taskList.filter(task => !task.completed);
+    localStorage.setItem("taskList", JSON.stringify(taskList));
+    document.querySelectorAll("#List li").forEach(taskItem => {
+        if (taskItem.querySelector("input[type='checkbox']").checked) {
+            taskItem.remove();
         }
-        
     });
 });
