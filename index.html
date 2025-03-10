@@ -6,62 +6,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To Do List</title>
     <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
     <div class="content">
 
-        <div>
-            <h1 id="heading">
-                To Do List
-            </h1>
+        <div id="headingContainer" class="heading-container"></div>
+        <div class="container">
+            <form id="formNewTask">
+                <input type="text" id="inputNewTask" placeholder="Add a new task">
+                <button type="submit" id="btnAddTask" title="Add a new task">
+                    <img class="icon" src="/imgs/icons8-add-100.png">
+                </button>
+            </form>
+
+            <div class="btnDeleteTasks">
+                <button type="button" id="btnDeleteTasks" style="display: none;">Delete all</button>
+            </div>
+
+            <div>
+                <ul id="List">
+                </ul>
+            </div>
         </div>
-
-        <form id="formNewTask">
-            <input type="text" id="inputNewTask" placeholder="Add a new task">
-            <button type="submit" id="btnAddTask" title="Add a new task">
-                <img class="icon" src="/imgs/icons8-add-100.png">
-            </button>
-        </form>
-
-        <div>
-            <ul id="taskList">
-
-                <li>
-                    <label>
-                        <input type="checkbox" id="task1" name="task1">
-                        <span id="task1Text">Task 1</span>
-                    </label>
-                    <div>
-                        <button type="button" class="btnEditTask" title="Edit task">
-                            <img class="icon" src="/imgs/icons8-edit-100.png">
-                        </button>
-                        <button type="button" class="btnDeleteTask" title="Delete task">
-                            <img class="icon" src="/imgs/icons8-delete-100.png">
-                        </button>
-                    </div>
-                </li>
-
-                <li>
-                    <label>
-                        <input type="checkbox" id="task2" name="task2">
-                        <span id="task2Text">Task 2</span>
-                    </label>
-                    <div>
-                        <button type="button" class="btnEditTask" title="Edit task">
-                            <img class="icon" src="/imgs/icons8-edit-100.png">
-                        </button>
-                        <button type="button" class="btnDeleteTask" title="Delete task">
-                            <img class="icon" src="/imgs/icons8-delete-100.png">
-                        </button>
-                    </div>
-
-            </ul>
-        </div>
-
     </div>
 
+    <footer>
+        <span>© 2025 Hélder Fernandes. All rights reserved.</span>
+<br>
+        <span><a href="https://yourwebsite.com">Portfolio</a></span>
+        <span> | </span>
+        <span><a href="mailto:helderfernandeswork@gmail.com">Contact</a></span>
+        <span> | </span>
+
+        <span>
+            <a href="https://linkedin.com/in/helderfernandes101" target="_blank">LinkedIn</a> |
+            <a href="https://github.com/HelderHub" target="_blank">GitHub</a>
+        </span>
+    </footer>
+    
     <script src="script.js"></script>
+    <script src="style.js"></script>
 
 </body>
 

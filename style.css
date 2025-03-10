@@ -1,6 +1,44 @@
-.content {
-    width: 400px;
-    margin: 0 auto;
+/* Global Styles */
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('imgs/top-view-alphabet-letters-frame.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    position: relative; /* Ensure the body is positioned relative for absolute positioning of cards */
+    overflow: hidden; /* Prevent scrollbars from appearing when cards fall */
+    font-size: 1rem; /* Base font size */
+}
+
+/* Footer Styles */
+footer {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+footer span {
+    margin: 0.5rem 0;
+}
+
+footer a {
+    color: lightskyblue;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* General Element Styles */
+span {
+    font-size: 0.8rem;
 }
 
 .icon {
@@ -10,14 +48,22 @@
 }
 
 button {
-    height: 32px;
+    height: 2rem;
     padding: 0 1rem;
+}
+
+/* Content Container */
+.content {
+    width: 25rem;
+    margin: 0 auto;
+    padding: 1rem;
 }
 
 .content h1 {
     text-align: center;
 }
 
+/* Form Styles */
 .content form {
     display: flex;
     gap: 0.5rem;
@@ -27,31 +73,74 @@ button {
     flex-grow: 1;
 }
 
-#taskList {
+/* Task List Styles */
+#List {
     list-style: none;
     padding-left: 0;
     display: flex;
     flex-direction: column;
-    gap: .5rem;
-    padding: .5rem;
+    gap: 0.5rem;
+}
 
-    li {
-        display: flex;
-        gap: .5rem;
-        label {
-            flex-grow: 1;
-        }
+#List li {
+    display: flex;
+    gap: 0.5rem;
+}
 
-        input[type="checkbox"]:checked ~ span {
-            text-decoration: line-through;
-            opacity: 0.5;
-        }
-        
-        span {
-            flex-grow: 1;
-            border: 0;
-            background-color: red;
-            padding: .5rem;
-        }
-    }
+#List li label {
+    flex-grow: 1;
+}
+
+#List li input[type="checkbox"]:checked ~ span {
+    text-decoration: line-through;
+    opacity: 0.5;
+}
+
+#List li span {
+    flex-grow: 1;
+    border: 0;
+    padding: 0.5rem;
+}
+
+/* Container Styles */
+.container {
+    background: -webkit-gradient(linear, left top, left bottom, from(#f1f1f1), to(#fff));
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+    justify-content: space-between;
+    align-items: stretch;
+    border-radius: 0.2rem;
+    box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.5);
+    padding: 1rem;
+}
+
+/* Card Styles */
+.card {
+    width: 4.0625rem; /* 65px */
+    height: 4.375rem; /* 70px */
+    background: rgba(255, 255, 255, 0.833);
+    border-radius: 0.0625rem; /* 1px */
+    box-shadow: 0.625rem 0.625rem 0.3125rem rgba(0, 0, 0, 0.5); /* 10px 10px 5px */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem; /* 48px */
+    font-weight: bold;
+    color: #333;
+    text-transform: uppercase;
+    font-family: Arial, sans-serif;
+}
+
+/* Heading Container */
+.heading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Space Between Heading Characters */
+.space {
+    margin: 0 0.625rem; /* 10px */
 }
