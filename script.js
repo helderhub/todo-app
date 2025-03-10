@@ -22,6 +22,9 @@ document.getElementById("formNewTask").addEventListener("submit", (event) => {
 
     // Create a new task element in the DOM
     createTaskElement(newTaskItem);
+
+    // Clear the input field
+    document.getElementById("inputNewTask").value = "";
 });
 
 // Function to get the data from local storage
