@@ -60,9 +60,9 @@ function createTaskElement(task) {
     taskCheckbox.type = "checkbox";
     taskCheckbox.checked = task.completed;
     taskText.innerText = task.text;
-    taskEditButton.innerHTML = '<img class="icon" src="/imgs/icons8-edit-100.png">';
+    taskEditButton.innerHTML = '<img class="icon" src="imgs/icons8-edit-100.png" alt="Edit task">';
     taskEditButton.disabled = task.completed;
-    taskDeleteButton.innerHTML = '<img class="icon" src="/imgs/icons8-delete-100.png">';
+    taskDeleteButton.innerHTML = '<img class="icon" src="imgs/icons8-delete-100.png" alt="Delete task">';
 
     // Add event listeners to the new elements
     taskCheckbox.addEventListener("change", () => {
@@ -84,10 +84,12 @@ function createTaskElement(task) {
         var index = taskList.findIndex((i) => i.text === task.text);
         taskList.splice(index, 1);
         localStorage.setItem("taskList", JSON.stringify(taskList));
+        newNotification('Task deleted');
     });
 
     taskText.addEventListener("focusout", () => {
         saveTaskEdit(task, taskText, taskCheckbox, taskEditButton);
+        newNotification('Task updated');
     });
 
     taskText.addEventListener("keypress", (event) => {
@@ -106,6 +108,7 @@ function createTaskElement(task) {
     // Insert the new task item at the beginning of the list
     var taskListElement = document.getElementById("List");
     taskListElement.insertBefore(taskItem, taskListElement.firstChild);
+    // newNotification('Task added');
 }
 
 // Function to save the edited task
@@ -115,6 +118,7 @@ function saveTaskEdit(task, taskText, taskCheckbox, taskEditButton) {
     taskText.contentEditable = false;
     task.text = taskText.innerText;
     localStorage.setItem("taskList", JSON.stringify(taskList));
+    newNotification('Task updated');
 }
 
 // Add event listener to the button for deleting completed tasks
@@ -126,4 +130,22 @@ document.getElementById("btnDeleteTasks").addEventListener("click", () => {
             taskItem.remove();
         }
     });
+    newNotification('Tasks deleted');
 });
+
+function newNotification(notification) {
+    const notifications = document.getElementById('notifications');
+    const newNotification = document.createElement('div');
+    newNotification.classList.add('notification');
+    newNotification.innerText = notification;
+    notifications.appendChild(newNotification);
+    setTimeout(() => {
+        newNotification.remove();
+}, 5000)}
+
+setTimeout(() => {newNotification('Hi there :)')}, 2000)
+
+// newNotification('Welcome to your task list!')
+// newNotification('Error', 'error')
+// newNotification('Success', 'success')
+// newNotification('Warning', 'warning')

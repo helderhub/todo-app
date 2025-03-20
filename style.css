@@ -1,4 +1,3 @@
-/* Global Styles */
 body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     margin: 0;
@@ -6,9 +5,11 @@ body {
     background-image: url('imgs/top-view-alphabet-letters-frame.jpg');
     background-size: cover;
     background-attachment: fixed;
-    position: relative; /* Ensure the body is positioned relative for absolute positioning of cards */
-    overflow: hidden; /* Prevent scrollbars from appearing when cards fall */
-    font-size: 1rem; /* Base font size */
+    position: relative;
+    /* Ensure the body is positioned relative for absolute positioning of cards */
+    overflow: hidden;
+    /* Prevent scrollbars from appearing when cards fall */
+    font-size: 1rem;
 }
 
 /* Footer Styles */
@@ -73,6 +74,45 @@ button {
     flex-grow: 1;
 }
 
+#notifications {
+    position: absolute;
+    z-index: 99;
+    left: 0rem;
+    top: -1.9rem;
+    display: flex;
+    flex-direction: column;
+}
+
+#notifications .notification {
+    background-color: lightskyblue;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    animation: notification 5s forwards;
+}
+
+/* CSS not Working
+#notifications .notification.error {
+    background-color: lightcoral;
+}
+
+#notifications .notification.success {
+    background-color: lightgreen;
+}
+
+#notifications .notification.warning {
+    background-color: lightgoldenrodyellow;
+}
+*/
+
+@keyframes notification {
+    0% { transform: translateX(110%); opacity: 0; font-size: 2rem; }
+    25% { transform: translateX(-10); font-size: 1rem; }
+    30% { transform: translateX(0); opacity: 1; }
+    70% { transform: translateX(0); opacity: 1; }
+    75% { transform: translateX(-10); }
+    100% { transform: translateX(110%); opacity: 0; }
+}
+
 /* Task List Styles */
 #List {
     list-style: none;
@@ -85,13 +125,15 @@ button {
 #List li {
     display: flex;
     gap: 0.5rem;
+    border-bottom: #33333326 solid 1px;
+    padding: 0.1rem;
 }
 
 #List li label {
     flex-grow: 1;
 }
 
-#List li input[type="checkbox"]:checked ~ span {
+#List li input[type="checkbox"]:checked~span {
     text-decoration: line-through;
     opacity: 0.5;
 }
@@ -104,6 +146,7 @@ button {
 
 /* Container Styles */
 .container {
+    position: relative;
     background: -webkit-gradient(linear, left top, left bottom, from(#f1f1f1), to(#fff));
     display: flex;
     flex-direction: column;
@@ -118,15 +161,15 @@ button {
 
 /* Card Styles */
 .card {
-    width: 4.0625rem; /* 65px */
-    height: 4.375rem; /* 70px */
+    width: 4.0625rem;
+    height: 4.375rem;
     background: rgba(255, 255, 255, 0.833);
-    border-radius: 0.0625rem; /* 1px */
-    box-shadow: 0.625rem 0.625rem 0.3125rem rgba(0, 0, 0, 0.5); /* 10px 10px 5px */
+    border-radius: 0.0625rem;
+    box-shadow: 0.625rem 0.625rem 0.3125rem rgba(0, 0, 0, 0.5);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 3rem; /* 48px */
+    font-size: 3rem;
     font-weight: bold;
     color: #333;
     text-transform: uppercase;
@@ -142,5 +185,5 @@ button {
 
 /* Space Between Heading Characters */
 .space {
-    margin: 0 0.625rem; /* 10px */
+    margin: 0 0.625rem;
 }
