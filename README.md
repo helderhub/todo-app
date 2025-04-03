@@ -26,7 +26,11 @@ A simple and lightweight **To-Do List App** built with **HTML, CSS, and JavaScri
 (Include screenshots of your app if possible)
 
 ## 🌍 Live Demo
-(If hosted on GitHub Pages or Netlify, include the link here)
+
+<div align="left">
+    <a href="https://helderhub.github.io/todo-app">
+    </a>
+</div>
 
 ## 🤝 Contributing
 Contributions are welcome! Feel free to fork this repository and submit a pull request.
