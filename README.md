@@ -34,7 +34,7 @@ A simple and lightweight **To-Do List App** built with **HTML, CSS, and JavaScri
 ## 📸 Screenshots
 <div align="left">
    <a href="https://helderhub.github.io/todo-app" target="_blank">
-      <img src="imgs/screenshot_todo_app.png" alt="Screenshot of Todo App" width="600" height="338"/>
+      <img src="imgs/screenshot_todo_app.png" alt="Screenshot of Todo App" width="700" height="394"/>
    </a> 
 </div>
 
