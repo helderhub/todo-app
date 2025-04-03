@@ -32,9 +32,9 @@ A simple and lightweight **To-Do List App** built with **HTML, CSS, and JavaScri
    - Open `http://localhost:8000` (or the port assigned) in your preferred web browser.
 
 ## 📸 Screenshots
-<div align="left">View the Live Demo Here
+<div align="left">
    <a href="https://helderhub.github.io/todo-app" target="_blank">
-      <img src="imgs/screenshot_todo_app.png" alt="Screenshot of Todo App" width="600" height="400"/>
+      <img src="imgs/screenshot_todo_app.png" alt="Screenshot of Todo App" width="600" height="338"/>
    </a> 
 </div>
 
