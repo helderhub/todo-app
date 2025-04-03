@@ -18,13 +18,22 @@ A simple and lightweight **To-Do List App** built with **HTML, CSS, and JavaScri
    ```sh
    cd todo-app
    ```
-3. **Open the `index.html` File in a Browser**
-   - Simply open `index.html` in your preferred web browser.
-   - No additional setup is required.
+3. **Run a Local Server**
+   Since the app requires a local server, you can start one using Python:
+   ```sh
+   # For Python 3
+   python -m http.server 8000
+   ```
+   or using Node.js:
+   ```sh
+   npx serve
+   ```
+4. **Open in Browser**
+   - Open `http://localhost:8000` (or the port assigned) in your preferred web browser.
 
 ## 📸 Screenshots
-<div align="left">
-   <a href="https://helderhub.github.io/todo-app" target="_blank">View the Live Demo Here
+<div align="left">View the Live Demo Here
+   <a href="https://helderhub.github.io/todo-app" target="_blank">
       <img src="imgs/screenshot_todo_app.png" alt="Screenshot of Todo App" width="600" height="400"/>
    </a> 
 </div>
