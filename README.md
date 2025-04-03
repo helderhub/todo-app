@@ -40,8 +40,8 @@ A simple and lightweight **To-Do List App** built with **HTML, CSS, and JavaScri
 
 ## 🌍 Live Demo
 
-<div align="left">
-   <a href="https://helderhub.github.io/todo-app" target="_blank">View the Live Demo Here
+<div align="left" style="color:white;">
+   <a href="https://helderhub.github.io/todo-app" target="_blank">**View the Live Demo Here**
    </a>
 </div>
 
